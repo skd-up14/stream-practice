@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
+ * StreamAPIByFunction
+ * 
  * @author Souvik_Das
  *
  */
@@ -28,7 +30,7 @@ public class StreamAPIByFunction {
 	public static void main(String[] args) {
 
 		StreamAPIByFunction sf = new StreamAPIByFunction();
-		
+
 		System.out.println(sf.combine("+", list1, list2));
 
 		System.out.println(sf.combine("-", list3, list4));
