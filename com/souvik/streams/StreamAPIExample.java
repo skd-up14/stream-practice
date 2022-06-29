@@ -50,27 +50,27 @@ public class StreamAPIExample {
 		// > 100000)
 		List<Integer> transactionIdList = transactionList.stream().filter(t -> t.getPrice().intValue() > 100000)
 				.map(t -> t.getTransactionId()).collect(Collectors.toList());
-		System.out.println(transactionIdList);
+		System.out.println("Sum of all transactions greatre tha 10000::"+transactionIdList);
 
 		// calculate the total value of all transactions & COUNT total number of txs
 		Integer sumOfTransactions = transactionList.stream().mapToInt(t -> t.getPrice().intValue()).sum();
 
-		System.out.println(sumOfTransactions);
+		System.out.println("Total value of transaction::"+sumOfTransactions);
 
 		Long transactionCount = transactionList.stream().count();
 
-		System.out.println(transactionCount);
+		System.out.println("Total number of transaction::"+transactionCount);
 
 		// Find the highest value transaction
 		OptionalInt highestValTran = transactionList.stream().mapToInt(t -> t.getPrice().intValue()).max();
 
-		System.out.println(highestValTran.orElseThrow());
+		System.out.println("Highest value transaction::"+highestValTran.orElseThrow());
 
 		// To group a list of transactions by currency
 		Map<String, List<Transaction>> groupByCurrency = transactionList.stream()
 				.collect(Collectors.groupingBy(Transaction::getCurrency));
 
-		System.out.println(groupByCurrency);
+		System.out.println("Group transaction by currency::"+groupByCurrency);
 
 		// To group the transactions by the currency of transactions in each city to get
 		// the average transaction value for that currency
@@ -78,12 +78,12 @@ public class StreamAPIExample {
 				Transaction::getCurrency,
 				Collectors.groupingBy(Transaction::getCity, Collectors.averagingInt(t -> t.getPrice().intValue()))));
 
-		System.out.println(avgByCurrencyGroup);
+		System.out.println("Group transaction by currency and city and average of transaction::"+avgByCurrencyGroup);
 
 		// Average of Transactions > 100000 - Use of custom collector
 		TransactionAverage average = transactionList.stream().collect(new CustomCollector());
 
-		System.out.println(average.getAverage());
+		System.out.println("Average of transactions > 10000::"+average.getAverage());
 
 	}
 
